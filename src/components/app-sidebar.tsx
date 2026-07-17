@@ -66,8 +66,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import chromeIcon from "@/chrome.svg";
-import samLogo from "@/sam.svg";
 
 type NavChild = { title: string; url: string; icon: React.ComponentType<{ className?: string }> };
 type NavSection = { label: string; items: NavChild[] };
@@ -143,7 +141,7 @@ const extensions: NavItem[] = [
   {
     title: "Get Chrome Extension",
     url: CHROME_EXTENSION_URL,
-    icon: chromeIcon,
+    icon: "/chrome.svg",
     external: true,
   },
 ];
@@ -364,7 +362,7 @@ export function AppSidebar() {
               onMouseLeave={() => setCollapsedLogoHovered(false)}
             >
               <img
-                src={samLogo}
+                src="/sam.svg"
                 alt="Sam"
                 className={`block w-20 shrink-0 object-contain transition-opacity duration-150 ${
                   collapsedLogoHovered ? "opacity-0" : "opacity-100"
@@ -384,7 +382,7 @@ export function AppSidebar() {
               className="flex w-20 shrink-0 items-center justify-start cursor-pointer"
               aria-label="Home"
             >
-              <img src={samLogo} alt="Sam" className="block w-20 shrink-0 object-contain" />
+              <img src="/sam.svg" alt="Sam" className="block w-20 shrink-0 object-contain" />
             </Link>
           )}
         </div>
