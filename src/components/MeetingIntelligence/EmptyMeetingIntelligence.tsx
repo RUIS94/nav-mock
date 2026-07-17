@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, FileText, Sparkles, Mail, BarChart2, GraduationCap } from 'lucide-react';
 import TranscriptTab from '../MeetingIntelligenceTab/EmptyTranscriptTab';
 import SummaryTab from '../MeetingIntelligenceTab/EmptySummaryTab';
 import FollowUpTab from '../MeetingIntelligenceTab/EmptyFollowUpTab';
@@ -17,11 +17,11 @@ const EmptyMeetingIntelligence: React.FC<EmptyMeetingIntelligenceProps> = ({ onN
   const [isAskSamOpen, setIsAskSamOpen] = useState(false);
   
   const tabs = [
-    { id: 'transcript', label: 'Transcript' },
-    { id: 'summary', label: 'Meeting Summary' },
-    { id: 'followup', label: 'Follow-up Letter' },
-    { id: 'analytics', label: 'Analytics' },
-    { id: 'coaching', label: 'Coaching' }
+    { id: 'transcript', label: 'Transcript', icon: FileText },
+    { id: 'summary', label: 'Meeting Summary', icon: Sparkles },
+    { id: 'followup', label: 'Follow-up Letter', icon: Mail },
+    { id: 'analytics', label: 'Analytics', icon: BarChart2 },
+    { id: 'coaching', label: 'Coaching', icon: GraduationCap }
   ];
 
   const renderTabContent = () => {
@@ -56,10 +56,11 @@ const EmptyMeetingIntelligence: React.FC<EmptyMeetingIntelligenceProps> = ({ onN
                 <button
                   type="button"
                   onClick={() => setIsAskSamOpen(true)}
-                  className="mr-4 inline-flex items-center gap-2 rounded-lg border border-[#ffd6a8] bg-white px-4 py-2 text-sm font-medium text-[#FF8E1C] transition-colors hover:bg-[#fff7ed]"
+                  aria-label="Ask Sam"
+                  className="mr-2 sm:mr-4 inline-flex items-center gap-2 rounded-lg border-0 sm:border sm:border-[#ffd6a8] bg-transparent sm:bg-white p-2 sm:px-4 sm:py-2 text-sm font-medium text-[#FF8E1C] transition-colors hover:bg-[#fff7ed]"
                 >
-                  <MessageCircle className="h-4 w-4" />
-                  <span>Ask Sam</span>
+                  <MessageCircle className="h-5 w-5 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Ask Sam</span>
                 </button>
               )}
             </div>
@@ -72,20 +73,25 @@ const EmptyMeetingIntelligence: React.FC<EmptyMeetingIntelligenceProps> = ({ onN
             {/* Tab Navigation */}
             <div className="border-b border-gray-200">
               <div className="px-6">
-                <nav className="flex space-x-8 justify-start">
-                  {tabs.map((tab) => (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
-                        activeTab === tab.id
-                          ? 'border-[#605BFF] text-[#605BFF]'
-                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
+                <nav className="flex justify-between sm:justify-start sm:space-x-8">
+                  {tabs.map((tab) => {
+                    const Icon = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        aria-label={tab.label}
+                        className={`flex flex-1 sm:flex-none items-center justify-center sm:justify-start gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                          activeTab === tab.id
+                            ? 'border-[#605BFF] text-[#605BFF]'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        }`}
+                      >
+                        <Icon className="h-5 w-5 sm:h-4 sm:w-4" />
+                        <span className="hidden sm:inline">{tab.label}</span>
+                      </button>
+                    );
+                  })}
                 </nav>
               </div>
             </div>

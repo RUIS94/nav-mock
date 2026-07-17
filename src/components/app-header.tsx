@@ -131,12 +131,23 @@ export function AppHeader() {
         <div className="sticky z-20 bg-amber-50">
           <div className="relative flex items-center justify-center px-12 py-2 text-xs text-amber-950">
             <div className="min-w-0 text-center">
-              <span className="font-medium">
-                You're almost out — {summaryRemaining} summary credits left.{" "}
+              {/* Mobile: remaining count only, no marketing copy, no upgrade link */}
+              <span className="font-medium sm:hidden">
+                {summaryRemaining} meeting summaries left this cycle
               </span>
-              <Link to="/admin/billing" className="font-medium text-primary hover:text-primary/80">
-                See plans
-              </Link>
+
+              {/* Desktop / tablet: full copy with marketing nudge and upgrade link */}
+              <span className="hidden sm:inline">
+                <span className="font-medium">
+                  Almost there — you can generate {summaryRemaining} more meeting summaries this cycle.{" "}
+                </span>
+                <Link to="/admin/billing" className="font-medium text-primary hover:text-primary/80">
+                  Upgrade now
+                </Link>
+                <span className="font-medium">
+                  {" "}to keep the going.
+                </span>
+              </span>
             </div>
             <Button
               type="button"
